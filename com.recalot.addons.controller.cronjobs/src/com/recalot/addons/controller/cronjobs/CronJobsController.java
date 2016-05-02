@@ -72,6 +72,10 @@ public class CronJobsController implements Controller, Closeable {
                     result = getCronJob(template, param);
                     break;
                 }
+                case GetCronJobBuilder: {
+                    result = getCronJobBuilder(template, param);
+                    break;
+                }
                 case DeleteCronJob: {
                     result = deleteCronJob(template, param);
                     break;
@@ -106,6 +110,12 @@ public class CronJobsController implements Controller, Closeable {
         return template.transform(cra.getCronJob(param.get(Helper.Keys.ID)));
     }
 
+    private TemplateResult getCronJobBuilder(CronJobsTemplate template, Map<String, String> param) throws BaseException {
+        CronJobsAccess cra = access.getFirstInstance();
+
+        return template.transform(cra.getCronJobBuilder(param.get(Helper.Keys.ID)));
+    }
+
     private TemplateResult getCronJobs(CronJobsTemplate template, Map<String, String> param) throws BaseException {
         CronJobsAccess cra = access.getFirstInstance();
         List<CronJobInformation> jobs = cra.getCronJobs();
@@ -138,7 +148,8 @@ public class CronJobsController implements Controller, Closeable {
         GetCronJobs(0),
         GetCronJob(1),
         DeleteCronJob(2),
-        CreateCronJob(3);
+        CreateCronJob(3),
+        GetCronJobBuilder(4);
 
         private final int value;
 

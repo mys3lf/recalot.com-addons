@@ -113,8 +113,19 @@ public class Servlet extends HttpServlet {
                     case 1: {
                         switch (method) {
                             case GET: {
-                                params.put(Helper.Keys.ID, split[0]);
-                                result = this.handler.process(CronJobsController.CronJobsRequestAction.GetCronJob, templateKey, params);
+                                String cronJobId = split[0];
+
+                                if(cronJobId.startsWith("cron-job-builder-")){
+                                    params.put(Helper.Keys.ID, cronJobId.replace("cron-job-builder-", ""));
+
+                                    result = this.handler.process(CronJobsController.CronJobsRequestAction.GetCronJobBuilder, templateKey, params);
+                                } else {
+                                    params.put(Helper.Keys.ID, cronJobId);
+
+                                    result = this.handler.process(CronJobsController.CronJobsRequestAction.GetCronJob, templateKey, params);
+                                }
+
+
                                 break;
                             }
                             case DELETE: {

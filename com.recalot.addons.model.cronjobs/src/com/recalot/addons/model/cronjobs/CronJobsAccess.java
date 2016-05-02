@@ -21,6 +21,7 @@ import com.recalot.addons.model.cronjobs.interfaces.CronJobInformation;
 import com.recalot.common.GenericServiceListener;
 import com.recalot.common.communication.Message;
 import com.recalot.common.exceptions.BaseException;
+import com.recalot.common.exceptions.NotFoundException;
 import org.osgi.framework.BundleContext;
 
 import java.io.IOException;
@@ -28,13 +29,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Matthäus Schmedding (info@recalot.com)
  */
 public class CronJobsAccess implements com.recalot.common.communication.Service {
     private final GenericServiceListener<CronJobBuilder> cronJobBuilder;
-    private HashMap<String, CronJob> cronJobs;
+    private ConcurrentHashMap<String, CronJob> cronJobs;
     private BundleContext context;
 
     public CronJobsAccess(BundleContext context) {
@@ -65,8 +67,19 @@ public class CronJobsAccess implements com.recalot.common.communication.Service 
 
     }
 
-    public CronJobInformation getCronJob(String id) {
-        return null;
+    public CronJob getCronJob(String id) throws NotFoundException {
+        // Lock list and return data source object.
+        synchronized (cronJobs) {
+            if (cronJobs.containsKey(id)) {
+                return cronJobs.get(id);
+            }
+        }
+
+        throw new NotFoundException("Cron Job with id %s not found.", id);
+    }
+
+    public CronJobBuilder getCronJobBuilder(String id) throws NotFoundException {
+        return cronJobBuilder.getInstance(id);
     }
 
     public Message deleteCronJob(String id) {
