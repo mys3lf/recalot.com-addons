@@ -14,23 +14,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with recalot.com. If not, see <http://www.gnu.org/licenses/>.
-package com.recalot.addons.controller.cronjobs.templates;
+package com.recalot.addons.model.cronjobs.jobs;
 
-import com.recalot.addons.model.cronjobs.interfaces.CronJobInformation;
-import com.recalot.common.communication.Message;
-import com.recalot.common.communication.Service;
-import com.recalot.common.communication.TemplateResult;
-import com.recalot.common.exceptions.BaseException;
+import com.recalot.addons.model.cronjobs.interfaces.CronJob;
 
-import java.util.List;
+import java.io.IOException;
 
 /**
  * @author Matthäus Schmedding (info@recalot.com)
  */
-public interface CronJobsTemplate extends Service {
-    public TemplateResult transform(BaseException ex);
+public class TestCronJob extends CronJob {
+    public TestCronJob() {
+        super("test", "no info", "description");
+    }
 
-    TemplateResult transform(List<CronJobInformation> jobs);
-    TemplateResult transform(CronJobInformation cronJob);
-    TemplateResult transform(Message message);
+    @Override
+    public void close() throws IOException {
+
+    }
 }

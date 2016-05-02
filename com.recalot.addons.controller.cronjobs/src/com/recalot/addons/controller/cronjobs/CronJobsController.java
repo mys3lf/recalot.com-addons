@@ -19,35 +19,20 @@ package com.recalot.addons.controller.cronjobs;
 
 
 import com.recalot.addons.controller.cronjobs.templates.CronJobsTemplate;
-import com.recalot.addons.model.cronjobs.CronJob;
+import com.recalot.addons.model.cronjobs.interfaces.CronJob;
 import com.recalot.addons.model.cronjobs.CronJobsAccess;
-import com.recalot.common.GenericControllerListener;
+import com.recalot.addons.model.cronjobs.interfaces.CronJobInformation;
 import com.recalot.common.GenericServiceListener;
 import com.recalot.common.Helper;
-import com.recalot.common.builder.DataSplitterBuilder;
-import com.recalot.common.builder.MetricBuilder;
-import com.recalot.common.builder.RecommenderBuilder;
 import com.recalot.common.communication.TemplateResult;
-import com.recalot.common.context.ContextProvider;
-import com.recalot.common.exceptions.AlreadyExistsException;
 import com.recalot.common.exceptions.BaseException;
-import com.recalot.common.impl.experiment.Experiment;
-import com.recalot.common.interfaces.controller.RecommenderController;
+import com.recalot.common.interfaces.controller.Controller;
 import com.recalot.common.interfaces.controller.RequestAction;
-import com.recalot.common.interfaces.model.data.DataAccess;
-import com.recalot.common.interfaces.model.data.DataSource;
-import com.recalot.common.interfaces.model.experiment.DataSplitter;
-import com.recalot.common.interfaces.model.experiment.ExperimentAccess;
-import com.recalot.common.interfaces.model.experiment.Metric;
-import com.recalot.common.interfaces.model.experiment.OnlineExperiment;
-import com.recalot.common.interfaces.model.rec.Recommender;
-import com.recalot.common.interfaces.template.ExperimentTemplate;
 import org.osgi.framework.BundleContext;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +40,7 @@ import java.util.Map;
 /**
  * @author matthaeus.schmedding
  */
-public class CronJobsController implements Closeable {
+public class CronJobsController implements Controller, Closeable {
 
     private final BundleContext context;
     private final GenericServiceListener<CronJobsTemplate> templates;
@@ -71,6 +56,7 @@ public class CronJobsController implements Closeable {
         this.context.addServiceListener(templates);
     }
 
+    @Override
     public TemplateResult process(RequestAction action, String templateKey, Map<String, String> param) throws BaseException {
 
         CronJobsTemplate template = templates.getInstance(templateKey);
@@ -103,20 +89,40 @@ public class CronJobsController implements Closeable {
     }
 
     private TemplateResult createCronJob(CronJobsTemplate template, Map<String, String> param) throws BaseException {
-        return null;
+        CronJobsAccess cra = access.getFirstInstance();
+
+        return template.transform(cra.createCronJob(param.get(Helper.Keys.ID), param));
     }
 
     private TemplateResult deleteCronJob(CronJobsTemplate template, Map<String, String> param) throws BaseException {
-        return null;
+        CronJobsAccess cra = access.getFirstInstance();
+
+        return template.transform(cra.deleteCronJob(param.get(Helper.Keys.ID)));
     }
 
     private TemplateResult getCronJob(CronJobsTemplate template, Map<String, String> param) throws BaseException {
-        return null;
+        CronJobsAccess cra = access.getFirstInstance();
+
+        return template.transform(cra.getCronJob(param.get(Helper.Keys.ID)));
     }
 
     private TemplateResult getCronJobs(CronJobsTemplate template, Map<String, String> param) throws BaseException {
         CronJobsAccess cra = access.getFirstInstance();
-        List<CronJob> jobs = cra.getCronJobs();
+        List<CronJobInformation> jobs = cra.getCronJobs();
+
+        if (param.containsKey(Helper.Keys.State)) {
+
+            CronJob.CronJobState state = CronJob.CronJobState.valueOf(param.get(Helper.Keys.State));
+            List<CronJobInformation> temp = new ArrayList<>();
+            for (CronJobInformation info : jobs) {
+                if (info.getState() == state) {
+                    temp.add(info);
+                }
+            }
+
+            return template.transform(temp);
+        }
+
         return template.transform(jobs);
     }
 

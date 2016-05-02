@@ -20,7 +20,6 @@ package com.recalot.addons.views.cronjobs;
 import com.recalot.addons.controller.cronjobs.CronJobsController;
 import com.recalot.common.Helper;
 import com.recalot.common.communication.TemplateResult;
-import com.recalot.common.interfaces.controller.ExperimentsController;
 import com.recalot.views.common.GenericControllerHandler;
 import com.recalot.views.common.HTTPMethods;
 import com.recalot.views.common.WebService;

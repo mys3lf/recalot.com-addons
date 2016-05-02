@@ -14,10 +14,21 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with recalot.com. If not, see <http://www.gnu.org/licenses/>.
-package com.recalot.addons.model.cronjobs;
+package com.recalot.addons.model.cronjobs.interfaces;
+
+import com.recalot.common.communication.Service;
 
 /**
  * @author Matthäus Schmedding (info@recalot.com)
  */
-public class CronJob {
+public interface CronJobInformation extends Service {
+
+    public CronJobState getState();
+    public String getId();
+    public String getInfo();
+
+    public enum CronJobState {
+        AVAILABLE,
+        RUNNING
+    }
 }
