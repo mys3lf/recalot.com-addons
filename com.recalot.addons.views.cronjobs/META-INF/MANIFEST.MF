@@ -1,0 +1,19 @@
+Manifest-Version: 1
+Bundle-Description:  Contains views for the cronjob addon
+Bundle-License: http://recalot.com/license.txt
+Bundle-SymbolicName: com.recalot.addons.views.cronjobs
+Bundle-ManifestVersion: 2
+Bundle-Vendor: Recalot.com
+Bundle-DocURL: http://recalot.com/doc
+Import-Package: org.osgi.framework,   com.recalot.common.communication
+ ,com.recalot.common.log,com.recalot.common.interfaces.model.data,com.
+ recalot.common.interfaces.model.rec,com.recalot.common.interfaces.mod
+ el.experiment,   com.recalot.common.exceptions,com.recalot.common,com
+ .recalot.common.builder,com.recalot.common.configuration, flexjson, c
+ om.recalot.common.context, com.recalot.views.common,
+ javax.servlet,javax.servlet.http, org.osgi.service.cm,
+ com.recalot.addons.controller.cronjobs
+Bundle-Name: Recalot.com Addons - Views - CronJobs
+Bundle-Version: 0.1.2.753
+Bundle-Activator: com.recalot.addons.views.cronjobs.Activator
+
