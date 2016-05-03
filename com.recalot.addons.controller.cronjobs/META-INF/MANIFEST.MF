@@ -16,5 +16,5 @@ Import-Package: org.osgi.framework,   com.recalot.common.communication
  erfaces.controller,com.recalot.common.interfaces.template,com.recalot
  .common, com.recalot.common.builder,com.recalot.common.configuration,
   com.recalot.model.experiments.access, com.recalot.common.context,
- com.recalot.addons.model.cronjobs
+ com.recalot.addons.model.cronjobs, com.recalot.addons.model.cronjobs.interfaces, com.recalot.addons.model.cronjobs.jobs
 

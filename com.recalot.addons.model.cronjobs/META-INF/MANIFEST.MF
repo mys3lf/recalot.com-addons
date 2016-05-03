@@ -2,14 +2,14 @@ Manifest-Version: 1
 Export-Service: com.recalot.model.data.access.DataAccess
 Bundle-Description:  Establish and manage connections to data sources
 Bundle-License: http://recalot.com/license.txt
-Bundle-SymbolicName: com.recalot.model.data.access
-Bundle-Name: Recalot.com Model - Data Access
+Bundle-SymbolicName: com.recalot.addons.model.cronjobs
+Bundle-Name: Recalot.com Addons - Model - CronJobs
 Bundle-Version: 0.1.2.752
 Bundle-Activator: com.recalot.addons.model.cronjobs.Activator
 Bundle-ManifestVersion: 2
 Bundle-Vendor: Recalot.com
 Bundle-DocURL: http://recalot.com/doc
-Export-Package: com.recalot.addons.model.cronjobs
+Export-Package: com.recalot.addons.model.cronjobs, com.recalot.addons.model.cronjobs.interfaces, com.recalot.addons.model.cronjobs.jobs
 Import-Package: org.osgi.framework,   com.recalot.common.communication
  ,   com.recalot.common.configuration,com.recalot.common.log,com.recal
  ot.common.interfaces.model.data,com.recalot.common.interfaces.model.r

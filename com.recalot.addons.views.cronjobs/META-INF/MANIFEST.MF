@@ -10,7 +10,7 @@ Import-Package: org.osgi.framework,   com.recalot.common.communication
  recalot.common.interfaces.model.rec,com.recalot.common.interfaces.mod
  el.experiment,   com.recalot.common.exceptions,com.recalot.common,com
  .recalot.common.builder,com.recalot.common.configuration, flexjson, c
- om.recalot.common.context, com.recalot.views.common,
+ om.recalot.common.context, com.recalot.views.common,  com.recalot.common.interfaces.controller,
  javax.servlet,javax.servlet.http, org.osgi.service.cm,
  com.recalot.addons.controller.cronjobs
 Bundle-Name: Recalot.com Addons - Views - CronJobs
