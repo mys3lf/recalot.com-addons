@@ -35,3 +35,13 @@ along with recalot.com. If not, see <http://www.gnu.org/licenses/>.
 -   Quartz Scheduler
     [Website](http://www.quartz-scheduler.org/ )
     [License](http://www.apache.org/licenses/LICENSE-2.0)
+-   Log4J
+    [Website](http://logging.apache.org/log4j/2.x/)
+    [License](http://logging.apache.org/log4j/2.x/license.html)
+-   c3p0
+    [Website](http://www.mchange.com/projects/c3p0/)
+    [License](http://www.gnu.org/licenses/lgpl-2.1.html)
+-   slf4j
+    [Website](http://www.slf4j.org/)
+    [License](http://www.slf4j.org/license.html)
+
