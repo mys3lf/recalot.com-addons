@@ -1,4 +1,4 @@
-# recalot.com - Addon
+# recalot.com - Addons
 
 Links: [Home](http://recalot.com) | [Documentation](http://recalot.com/documentation) | [Portal](http://portal.recalot.com) | [Examples](http://recalot.com/examples) | [Addons](https://github.com/mys3lf/recalot.com-addons)
 
